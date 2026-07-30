@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     public int health = 100;
     public float moveSpeed = 5f;
-    public float jumpForse = 10f;
+    public float jumpForse = 5f;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
