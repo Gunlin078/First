@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int health = 100;
+    public int coins = 0;
     public float moveSpeed = 5f;
     public float jumpForse = 5f;
     public Transform groundCheck;
@@ -71,8 +72,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Damage")
-        {
+        if (collision.gameObject.CompareTag("Damage")){
             health -= 25;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForse);
             StartCoroutine(BlinkRed());
