@@ -1,3 +1,4 @@
+using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine;
 
@@ -28,13 +29,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        float moveX = 0;
+        if (Keyboard.current != null){
+            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveX = 1f;
+            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) moveX = -1f;
+        }
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
         if (isGrounded) {
             extraJumps = extraJumpsValue;
         }
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame){
             if (isGrounded){
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForse);
             } else if (extraJumps > 0){
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour
                 extraJumps--;
             }
         }
-        SetAnimation(moveInput);
+        SetAnimation(moveX);
     }
 
     private void FixedUpdate()
@@ -50,9 +55,9 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
-    private void SetAnimation(float moveInput){
+    private void SetAnimation(float moveX){
         if (isGrounded) {
-            if (moveInput == 0) {animator.Play("Player_Idle"); }  
+            if (moveX == 0) {animator.Play("Player_Idle"); }  
             else                {animator.Play("Player_Run");  }
         }
         else {
