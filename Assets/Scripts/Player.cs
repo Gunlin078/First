@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     private void SetAnimation(float moveX){
         if (isGrounded) {
-            if (moveX == 0) {animator.Play("Player_Idle"); }  
+            if (moveX == 0)     {animator.Play("Player_Idle"); }  
             else                {animator.Play("Player_Run");  }
         }
         else {
@@ -86,6 +86,6 @@ public class Player : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
     private void Die() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
