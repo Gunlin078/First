@@ -26,6 +26,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void MainMenu() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
