@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
 
             if (health <= 0) { Die(); }
         }
+        else if (collision.gameObject.CompareTag("BouncePad")){
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForse * 2);
+        }
     }
     private IEnumerator BlinkRed() { 
         spriteRenderer.color = Color.red;
